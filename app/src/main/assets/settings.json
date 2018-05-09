@@ -1,0 +1,77 @@
+{
+  "widget": "android.widget.LinearLayout",
+  "properties": [
+    {
+      "name": "layout_width",
+      "type": "dimen",
+      "value": "match_parent"
+    },
+    {
+      "name": "layout_height",
+      "type": "dimen",
+      "value": "match_parent"
+    },
+    {
+      "name": "padding",
+      "type": "dimen",
+      "value": "10dp"
+    },
+    {
+      "name": "orientation",
+      "type": "string",
+      "value": "vertical"
+    }
+  ],
+  "views": [
+//    {
+//      "widget": "android.preference.ListPreference",
+//      "properties": [
+//        {
+//          "name": "layout_width",
+//          "type": "string",
+//          "value": "match_parent"
+//        },
+//        {
+//          "name": "layout_height",
+//          "type": "string",
+//          "value": "wrap_content"
+//        }
+//      ]
+//    },
+//    {
+//      "widget": "android.preference.EditTextPreference",
+//      "properties": [
+//        {
+//          "name": "layout_width",
+//          "type": "string",
+//          "value": "match_parent"
+//        },
+//        {
+//          "name": "layout_height",
+//          "type": "string",
+//          "value": "wrap_content"
+//        }
+//      ]
+//    },
+    {
+      "widget": "android.widget.Switch",
+      "properties": [
+        {
+          "name": "layout_width",
+          "type": "string",
+          "value": "wrap_content"
+        },
+        {
+          "name": "layout_height",
+          "type": "string",
+          "value": "wrap_content"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "toggle"
+        }
+      ]
+    }
+  ]
+}
