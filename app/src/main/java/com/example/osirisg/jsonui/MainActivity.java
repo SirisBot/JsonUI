@@ -2,8 +2,6 @@ package com.example.osirisg.jsonui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.avocarrot.json2view.DynamicView;
-import com.example.osirisg.jsonui.di.DaggerSettingsComponent;
-import com.example.osirisg.jsonui.di.SettingsModule;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,8 +20,6 @@ import java.io.InputStream;
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "TAG";
 
     @Inject
     SettingsService settingsService;
@@ -58,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         ((Switch) v).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                settingsService.observeSetting(isChecked);
+                                settingsService.observeSwitchToggledSetting(isChecked);
                             }
                         });
                     }

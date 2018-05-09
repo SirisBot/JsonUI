@@ -5,72 +5,29 @@ import org.reactivestreams.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.subjects.Subject;
+import io.reactivex.Flowable;
 
 public class SettingsService {
 
-    private List<Observer> observerList = new ArrayList<>();
-
-    private Subject subject = new Subject() {
+    private Flowable<Boolean> switchToggleFlowable = new Flowable<Boolean>() {
         @Override
-        public boolean hasObservers() {
-            return false;
-        }
-
-        @Override
-        public boolean hasThrowable() {
-            return false;
-        }
-
-        @Override
-        public boolean hasComplete() {
-            return false;
-        }
-
-        @Override
-        public Throwable getThrowable() {
-            return null;
-        }
-
-        @Override
-        protected void subscribeActual(Observer observer) {
-            observerList.add(observer);
-        }
-
-        @Override
-        public void onSubscribe(Disposable d) {
-
-        }
-
-        @Override
-        public void onNext(Object o) {
-            for (Observer observer : observerList) {
-                observer.onNext(o);
-            }
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onComplete() {
-
+        protected void subscribeActual(Subscriber<? super Boolean> s) {
+            switchToggleSubscribers.add(s);
         }
     };
+
+    private List<Subscriber<? super Boolean>> switchToggleSubscribers = new ArrayList<>();
 
     public SettingsService() {
     }
 
-    void observeSetting(Boolean object) {
-        subject.onNext(object);
+    void observeSwitchToggledSetting(Boolean toggled) {
+        for (Subscriber<? super Boolean> s : switchToggleSubscribers) {
+            s.onNext(toggled);
+        }
     }
 
-    void subscribe(Observer<Object> observer) {
-        subject.subscribe(observer);
+    void subscribeToSwitchToggleSetting(Subscriber<Boolean> subscriber) {
+        switchToggleFlowable.subscribe(subscriber);
     }
 }

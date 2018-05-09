@@ -8,17 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.osirisg.jsonui.di.DaggerSettingsComponent;
-import com.example.osirisg.jsonui.di.SettingsModule;
-
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import javax.inject.Inject;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 
 /**
@@ -33,28 +26,25 @@ public class SomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         setupDaggerComponent();
-        settingsService.subscribe(new Observer<Object>() {
-
+        settingsService.subscribeToSwitchToggleSetting(new Subscriber<Boolean>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(Subscription s) {
 
             }
 
             @Override
-            public void onNext(Object o) {
-                Boolean b = (Boolean) o;
-                Toast.makeText(getContext(), b.toString(), Toast.LENGTH_SHORT).show();
+            public void onNext(Boolean b) {
+                Toast.makeText(getContext(), "Switch toggled: " + b.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(Throwable t) {
 
             }
 

@@ -27,11 +27,15 @@ public class SettingsTests {
 
         final boolean initialValue = uiSwitch.isChecked();
 
+        final TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
+
+        settingsService.subscribeToSwitchToggleSetting(testSubscriber);
+
         CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                TestSubscriber testSubscriber = settingsService.observeSetting(isChecked).test();
-                boolean newValue = (boolean) testSubscriber.values().get(0);
+                settingsService.observeSwitchToggledSetting(isChecked);
+                boolean newValue = testSubscriber.values().get(0);
 
                 if (initialValue) {
                     assertTrue(!newValue);
