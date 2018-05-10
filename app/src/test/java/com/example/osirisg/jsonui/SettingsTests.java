@@ -1,6 +1,11 @@
 package com.example.osirisg.jsonui;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 
 import org.junit.Before;
@@ -13,28 +18,27 @@ import static org.junit.Assert.assertTrue;
 
 public class SettingsTests {
 
-    private Switch uiSwitch;
     private SettingsService settingsService;
 
     @Before
     public void setUp() {
-        uiSwitch = Mockito.mock(Switch.class);
         settingsService = new SettingsService();
     }
 
     @Test
-    public void isSwitchToggled() {
+    public void livePredictiveCardEnabledSettingTest() {
 
+        Switch uiSwitch = Mockito.mock(Switch.class);
         final boolean initialValue = uiSwitch.isChecked();
 
         final TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
 
-        settingsService.subscribeToSwitchToggleSetting(testSubscriber);
+        settingsService.subscribeToLivePredictiveCardSetting(testSubscriber);
 
         CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                settingsService.observeSwitchToggledSetting(isChecked);
+                settingsService.observeLivePredictiveCardSetting(isChecked);
                 boolean newValue = testSubscriber.values().get(0);
 
                 if (initialValue) {
@@ -46,5 +50,56 @@ public class SettingsTests {
         };
 
         checkedChangeListener.onCheckedChanged(uiSwitch, !uiSwitch.isChecked());
+    }
+
+    @Test
+    public void scanDataButtonClickedTest() {
+
+        final String clickString = "ClickString";
+
+        final TestSubscriber<String> testSubscriber = new TestSubscriber<>();
+
+        settingsService.subscribeScanDataPathSetting(testSubscriber);
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsService.observeScanDataPathSetting(clickString);
+                String test = testSubscriber.values().get(0);
+                assertTrue(clickString.equals(test));
+            }
+        };
+
+        onClickListener.onClick(Mockito.mock(Button.class));
+    }
+
+    @Test
+    public void mapDataPathChanged() {
+
+        final String mapDataPath = "/asdas/asdasd";
+
+        final TestSubscriber<String> testSubscriber = new TestSubscriber<>();
+
+        settingsService.subscribeToMapDataPathSetting(testSubscriber);
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingsService.observeMapDataPathSetting(s.toString());
+                String test = testSubscriber.values().get(0);
+                assertTrue(mapDataPath.equals(test));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
+
+        textWatcher.onTextChanged(mapDataPath, 0, 0, 0);
     }
 }

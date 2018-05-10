@@ -5,4 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/json_container_view"
-    tools:context=".MainActivity" />
+    tools:context=".MainActivity">
+
+</LinearLayout>

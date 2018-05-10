@@ -23,36 +23,45 @@
     }
   ],
   "views": [
-//    {
-//      "widget": "android.preference.ListPreference",
-//      "properties": [
-//        {
-//          "name": "layout_width",
-//          "type": "string",
-//          "value": "match_parent"
-//        },
-//        {
-//          "name": "layout_height",
-//          "type": "string",
-//          "value": "wrap_content"
-//        }
-//      ]
-//    },
-//    {
-//      "widget": "android.preference.EditTextPreference",
-//      "properties": [
-//        {
-//          "name": "layout_width",
-//          "type": "string",
-//          "value": "match_parent"
-//        },
-//        {
-//          "name": "layout_height",
-//          "type": "string",
-//          "value": "wrap_content"
-//        }
-//      ]
-//    },
+    {
+      "widget": "android.widget.Button",
+      "properties": [
+        {
+          "name": "layout_width",
+          "type": "string",
+          "value": "wrap_content"
+        },
+        {
+          "name": "layout_height",
+          "type": "string",
+          "value": "wrap_content"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "Scan for Map Data"
+        }
+      ]
+    },{
+      "widget": "android.widget.EditText",
+      "properties": [
+        {
+          "name": "layout_width",
+          "type": "string",
+          "value": "match_parent"
+        },
+        {
+          "name": "layout_height",
+          "type": "string",
+          "value": "wrap_content"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "/somemapdatapath/na"
+        }
+      ]
+    },
     {
       "widget": "android.widget.Switch",
       "properties": [
@@ -69,7 +78,7 @@
         {
           "name": "text",
           "type": "string",
-          "value": "toggle"
+          "value": "Enable Live Predictive Cards"
         }
       ]
     }

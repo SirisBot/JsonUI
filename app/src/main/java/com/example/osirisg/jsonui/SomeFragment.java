@@ -13,6 +13,8 @@ import org.reactivestreams.Subscription;
 
 import javax.inject.Inject;
 
+import io.reactivex.subscribers.DisposableSubscriber;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +34,7 @@ public class SomeFragment extends Fragment {
         // Inflate the layout for this fragment
 
         setupDaggerComponent();
-        settingsService.subscribeToSwitchToggleSetting(new Subscriber<Boolean>() {
+        settingsService.subscribeToLivePredictiveCardSetting(new Subscriber<Boolean>() {
             @Override
             public void onSubscribe(Subscription s) {
 
@@ -41,6 +43,48 @@ public class SomeFragment extends Fragment {
             @Override
             public void onNext(Boolean b) {
                 Toast.makeText(getContext(), "Switch toggled: " + b.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        settingsService.subscribeToMapDataPathSetting(new Subscriber<String>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        settingsService.subscribeScanDataPathSetting(new Subscriber<String>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
