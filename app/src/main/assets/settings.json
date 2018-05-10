@@ -28,12 +28,12 @@
       "properties": [
         {
           "name": "layout_width",
-          "type": "string",
-          "value": "wrap_content"
+          "type": "dimen",
+          "value": "match_parent"
         },
         {
           "name": "layout_height",
-          "type": "string",
+          "type": "dimen",
           "value": "wrap_content"
         },
         {
@@ -47,12 +47,12 @@
       "properties": [
         {
           "name": "layout_width",
-          "type": "string",
+          "type": "dimen",
           "value": "match_parent"
         },
         {
           "name": "layout_height",
-          "type": "string",
+          "type": "dimen",
           "value": "wrap_content"
         },
         {
@@ -67,18 +67,28 @@
       "properties": [
         {
           "name": "layout_width",
-          "type": "string",
-          "value": "wrap_content"
+          "type": "dimen",
+          "value": "match_parent"
         },
         {
           "name": "layout_height",
-          "type": "string",
+          "type": "dimen",
           "value": "wrap_content"
         },
         {
           "name": "text",
           "type": "string",
           "value": "Enable Live Predictive Cards"
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "16sp"
+        },
+        {
+          "name": "checked",
+          "type": "BOOLEAN",
+          "value": "true"
         }
       ]
     }
