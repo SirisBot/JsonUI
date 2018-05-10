@@ -1,4 +1,4 @@
-package com.example.osirisg.jsonui;
+package com.example.osirisg.jsonui.common;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -42,33 +42,33 @@ public class SettingsService {
     public SettingsService() {
     }
 
-    void observeLivePredictiveCardSetting(Boolean toggled) {
+    public void observeLivePredictiveCardSetting(Boolean toggled) {
         for (Subscriber<? super Boolean> s : livePredictiveCardSettingSubscribers) {
             s.onNext(toggled);
         }
     }
 
-    void subscribeToLivePredictiveCardSetting(Subscriber<Boolean> subscriber) {
+    public void subscribeToLivePredictiveCardSetting(Subscriber<Boolean> subscriber) {
         livePredictiveCardSettingFlowable.subscribe(subscriber);
     }
 
-    void observeMapDataPathSetting(String mapDataPath) {
+    public void observeMapDataPathSetting(String mapDataPath) {
         for (Subscriber<? super String> s : mapDataPathSettingSubscribers) {
             s.onNext(mapDataPath);
         }
     }
 
-    void subscribeToMapDataPathSetting(Subscriber<String> subscriber) {
+    public void subscribeToMapDataPathSetting(Subscriber<String> subscriber) {
         mapDataPathSettingFlowable.subscribe(subscriber);
     }
 
-    void observeScanDataPathSetting(String scanDataPath) {
+    public void observeScanDataPathSetting(String scanDataPath) {
         for (Subscriber<? super String> s : scanDataPathSettingSubscribers) {
             s.onNext(scanDataPath);
         }
     }
 
-    void subscribeScanDataPathSetting(Subscriber<String> subscriber) {
+    public void subscribeScanDataPathSetting(Subscriber<String> subscriber) {
         scanDataPathSettingFlowable.subscribe(subscriber);
     }
 }

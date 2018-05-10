@@ -1,6 +1,6 @@
 package com.example.osirisg.jsonui.di;
 
-import com.example.osirisg.jsonui.SettingsService;
+import com.example.osirisg.jsonui.common.SettingsService;
 
 import javax.inject.Singleton;
 

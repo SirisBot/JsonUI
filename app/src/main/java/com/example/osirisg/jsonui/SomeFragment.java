@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.osirisg.jsonui.common.SettingsService;
+
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import javax.inject.Inject;
-
-import io.reactivex.subscribers.DisposableSubscriber;
 
 
 /**

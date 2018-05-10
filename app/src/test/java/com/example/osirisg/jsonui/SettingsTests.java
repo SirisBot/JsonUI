@@ -5,8 +5,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
+
+import com.example.osirisg.jsonui.common.SettingsService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +75,7 @@ public class SettingsTests {
     }
 
     @Test
-    public void mapDataPathChanged() {
+    public void mapDataPathChangedTest() {
 
         final String mapDataPath = "/asdas/asdasd";
 
