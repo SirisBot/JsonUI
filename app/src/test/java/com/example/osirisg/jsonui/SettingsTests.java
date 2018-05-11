@@ -5,6 +5,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.example.osirisg.jsonui.common.SettingsService;
@@ -102,5 +103,26 @@ public class SettingsTests {
         };
 
         textWatcher.onTextChanged(mapDataPath, 0, 0, 0);
+    }
+
+    @Test
+    public void gpsConfigChangedTest() {
+
+        final int gpsIndex = 2;
+
+        final TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
+
+        settingsService.subscribeGPSConfigSetting(testSubscriber);
+
+        RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                settingsService.observeGPSConfigSetting(checkedId);
+                int change = testSubscriber.values().get(0);
+                assertTrue(gpsIndex == change);
+            }
+        };
+
+        onCheckedChangeListener.onCheckedChanged(Mockito.mock(RadioGroup.class), gpsIndex);
     }
 }

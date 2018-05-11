@@ -24,7 +24,7 @@
   ],
   "views": [
     {
-      "widget": "android.widget.Button",
+      "widget": "android.widget.LinearLayout",
       "properties": [
         {
           "name": "layout_width",
@@ -37,33 +37,46 @@
           "value": "wrap_content"
         },
         {
-          "name": "text",
+          "name": "padding",
+          "type": "dimen",
+          "value": "10dp"
+        },
+        {
+          "name": "orientation",
           "type": "string",
-          "value": "Scan for Map Data"
+          "value": "vertical"
         }
-      ]
-    },{
-      "widget": "android.widget.EditText",
-      "properties": [
+      ],
+      "views": [
         {
-          "name": "layout_width",
-          "type": "dimen",
-          "value": "match_parent"
-        },
-        {
-          "name": "layout_height",
-          "type": "dimen",
-          "value": "wrap_content"
-        },
-        {
-          "name": "text",
-          "type": "string",
-          "value": "/somemapdatapath/na"
+          "widget": "android.widget.Button",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Scan for Map Data"
+            },
+            {
+              "name": "tag",
+              "type": "string",
+              "value": "btn_test"
+            }
+          ]
         }
       ]
     },
     {
-      "widget": "android.widget.Switch",
+      "widget": "android.widget.LinearLayout",
       "properties": [
         {
           "name": "layout_width",
@@ -76,19 +89,257 @@
           "value": "wrap_content"
         },
         {
-          "name": "text",
-          "type": "string",
-          "value": "Enable Live Predictive Cards"
-        },
-        {
-          "name": "textSize",
+          "name": "padding",
           "type": "dimen",
-          "value": "16sp"
+          "value": "10dp"
         },
         {
-          "name": "checked",
-          "type": "BOOLEAN",
-          "value": "true"
+          "name": "orientation",
+          "type": "string",
+          "value": "vertical"
+        }
+      ],
+      "views": [
+        {
+          "widget": "android.widget.Switch",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Enable Live Predictive Cards"
+            },
+            {
+              "name": "textSize",
+              "type": "dimen",
+              "value": "16sp"
+            },
+            {
+              "name": "checked",
+              "type": "BOOLEAN",
+              "value": "true"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "widget": "android.widget.LinearLayout",
+      "properties": [
+        {
+          "name": "layout_width",
+          "type": "dimen",
+          "value": "match_parent"
+        },
+        {
+          "name": "layout_height",
+          "type": "dimen",
+          "value": "wrap_content"
+        },
+        {
+          "name": "padding",
+          "type": "dimen",
+          "value": "10dp"
+        },
+        {
+          "name": "orientation",
+          "type": "string",
+          "value": "vertical"
+        }
+      ],
+      "views": [
+        {
+          "widget": "android.widget.TextView",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Map Data Path"
+            }
+          ]
+        },
+        {
+          "widget": "android.widget.EditText",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "/somemapdatapath/na"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "widget": "android.widget.LinearLayout",
+      "properties": [
+        {
+          "name": "layout_width",
+          "type": "dimen",
+          "value": "match_parent"
+        },
+        {
+          "name": "layout_height",
+          "type": "dimen",
+          "value": "wrap_content"
+        },
+        {
+          "name": "padding",
+          "type": "dimen",
+          "value": "10dp"
+        },
+        {
+          "name": "orientation",
+          "type": "string",
+          "value": "vertical"
+        }
+      ],
+      "views": [
+        {
+          "widget": "android.widget.TextView",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "GPS Config"
+            }
+          ]
+        },
+        {
+          "widget": "android.widget.RadioGroup",
+          "properties": [
+            {
+              "name": "layout_width",
+              "type": "dimen",
+              "value": "match_parent"
+            },
+            {
+              "name": "layout_height",
+              "type": "dimen",
+              "value": "wrap_content"
+            }
+          ],
+          "views": [
+            {
+              "widget": "android.widget.RadioButton",
+              "properties": [
+                {
+                  "name": "layout_width",
+                  "type": "dimen",
+                  "value": "match_parent"
+                },
+                {
+                  "name": "layout_height",
+                  "type": "dimen",
+                  "value": "wrap_content"
+                },
+                {
+                  "name": "text",
+                  "type": "string",
+                  "value": "DeviceGPS"
+                }
+              ]
+            },
+            {
+              "widget": "android.widget.RadioButton",
+              "properties": [
+                {
+                  "name": "layout_width",
+                  "type": "dimen",
+                  "value": "match_parent"
+                },
+                {
+                  "name": "layout_height",
+                  "type": "dimen",
+                  "value": "wrap_content"
+                },
+                {
+                  "name": "text",
+                  "type": "string",
+                  "value": "MViewer"
+                }
+              ]
+            },
+            {
+              "widget": "android.widget.RadioButton",
+              "properties": [
+                {
+                  "name": "layout_width",
+                  "type": "dimen",
+                  "value": "match_parent"
+                },
+                {
+                  "name": "layout_height",
+                  "type": "dimen",
+                  "value": "wrap_content"
+                },
+                {
+                  "name": "text",
+                  "type": "string",
+                  "value": "AlongRoute GPS"
+                }
+              ]
+            },
+            {
+              "widget": "android.widget.RadioButton",
+              "properties": [
+                {
+                  "name": "layout_width",
+                  "type": "dimen",
+                  "value": "match_parent"
+                },
+                {
+                  "name": "layout_height",
+                  "type": "dimen",
+                  "value": "wrap_content"
+                },
+                {
+                  "name": "text",
+                  "type": "string",
+                  "value": "Kml"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

@@ -1,16 +1,13 @@
 package com.example.osirisg.jsonui.common;
 
 import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subscribers.DisposableSubscriber;
 
 public class SettingsService {
 
@@ -35,9 +32,17 @@ public class SettingsService {
         }
     };
 
+    private Flowable<Integer> gpsConfigSettingFlowable = new Flowable<Integer>() {
+        @Override
+        protected void subscribeActual(Subscriber<? super Integer> s) {
+            gpsConfigSettingSubscribers.add(s);
+        }
+    };
+
     private List<Subscriber<? super Boolean>> livePredictiveCardSettingSubscribers = new ArrayList<>();
     private List<Subscriber<? super String>> mapDataPathSettingSubscribers = new ArrayList<>();
     private List<Subscriber<? super String>> scanDataPathSettingSubscribers = new ArrayList<>();
+    private List<Subscriber<? super Integer>> gpsConfigSettingSubscribers = new ArrayList<>();
 
     public SettingsService() {
     }
@@ -70,5 +75,16 @@ public class SettingsService {
 
     public void subscribeScanDataPathSetting(Subscriber<String> subscriber) {
         scanDataPathSettingFlowable.subscribe(subscriber);
+    }
+
+    public void observeGPSConfigSetting(Integer gpsIndex) {
+        String thread = Thread.currentThread().getName();
+        for (Subscriber<? super Integer> s : gpsConfigSettingSubscribers) {
+            s.onNext(gpsIndex);
+        }
+    }
+
+    public void subscribeGPSConfigSetting(Subscriber<Integer> subscriber) {
+        gpsConfigSettingFlowable.subscribe(subscriber);
     }
 }

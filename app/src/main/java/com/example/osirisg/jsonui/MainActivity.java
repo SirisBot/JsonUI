@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.avocarrot.json2view.DynamicView;
@@ -48,43 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (jsonObject != null) {
             View dynamicView = DynamicView.createView(this, jsonObject, dynamicViewContainer);
-            if (dynamicView != null) {
-                dynamicViewContainer. addView(dynamicView);
-                ViewGroup views = findChildViews(dynamicViewContainer); //recursively find child views
-                for (int i = 0; i < views.getChildCount(); i++) {
-                    View v = views.getChildAt(i);
-                    if (v instanceof Switch) {
-                        ((Switch) v).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                settingsService.observeLivePredictiveCardSetting(isChecked);
-                            }
-                        });
-                    } else if (v instanceof EditText) {
-                        ((EditText) v).addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                settingsService.observeMapDataPathSetting(s.toString());
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-
-                            }
-                        });
-                    } else if (v instanceof Button) {
-                        v.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                settingsService.observeScanDataPathSetting("{Path that is returned from scan}");
-                            }
-                        });
-                    }
+            dynamicViewContainer.addView(dynamicView);
+            ViewGroup container = (ViewGroup) dynamicViewContainer.getChildAt(0);
+            if (container != null) {
+                for (int i = 0; i < container.getChildCount(); i++) {
+                    setupChildView((ViewGroup) container.getChildAt(i));
                 }
             }
         }
@@ -96,15 +64,48 @@ public class MainActivity extends AppCompatActivity {
         ((App) getApplication()).getSettingsComponent().inject(this);
     }
 
-    public ViewGroup findChildViews(ViewGroup viewGroup) {
-        View v = null;
+    public void setupChildView(ViewGroup viewGroup) {
+        View v;
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             v = viewGroup.getChildAt(i);
-            if (!(v instanceof LinearLayout)) {
-                return viewGroup;
+            if (v instanceof Switch) {
+                ((Switch) v).setOnCheckedChangeListener((buttonView, isChecked) -> settingsService.observeLivePredictiveCardSetting(isChecked));
+            } else if (v instanceof EditText) {
+                ((EditText) v).addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        settingsService.observeMapDataPathSetting(s.toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+            } else if (v instanceof Button) {
+                String tag = (String) v.getTag();
+                v.setOnClickListener(v1 -> {
+                    Scan scan = (String s) -> "Path found was: " + s;
+                    settingsService.observeScanDataPathSetting(scan.scan("/somepath/somefile/na"));
+                });
+            } else if (v instanceof RadioGroup) {
+                ((RadioGroup) v).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        settingsService.observeGPSConfigSetting(checkedId);
+                    }
+                });
             }
         }
-        return findChildViews((ViewGroup) v);
+    }
+
+    interface Scan {
+        String scan(String s);
     }
 
     public String readJSONFromAsset() {

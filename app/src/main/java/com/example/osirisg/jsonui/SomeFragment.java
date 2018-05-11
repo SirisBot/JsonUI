@@ -97,6 +97,26 @@ public class SomeFragment extends Fragment {
 
             }
         });
+        settingsService.subscribeGPSConfigSetting(new Subscriber<Integer>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Toast.makeText(getContext(), integer.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
 
         return inflater.inflate(R.layout.fragment_some, container, false);
     }
@@ -104,5 +124,4 @@ public class SomeFragment extends Fragment {
     private void setupDaggerComponent() {
         ((App) getActivity().getApplication()).getSettingsComponent().inject(this);
     }
-
 }
